@@ -1,37 +1,37 @@
-import { useEffect, useState } from 'react'
-import get from 'lodash/get'
 import { RenderFieldExtensionCtx } from 'datocms-plugin-sdk'
-import { Canvas, Form, Button, Spinner } from 'datocms-react-ui'
+import { Button, Canvas, Form, Spinner } from 'datocms-react-ui'
+import get from 'lodash/get'
+import { useEffect, useState } from 'react'
 
-import {
-  getTranslation,
-  getStructuredTextTranslation,
-  getMarkdownTranslation,
-  getRichTextTranslation,
-  getHtmlTranslation,
-  getSeoTranslation,
-  getSlugTranslation,
-} from '../../lib/translation'
-import {
-  getSupportedToLocale,
-  getSupportedFromLocale,
-} from '../../lib/supported-locales'
-import {
-  Editor,
-  TranslationFormat,
-  TranslationOptions,
-  GlobalParameters,
-  Parameters,
-  TranslationService,
-  TranslationServiceKey,
-  OpenAIDefaultValues,
-} from '../../lib/types'
 import {
   deeplFormalityLevelOptions,
   translationFormats,
   translationServiceOptions,
 } from '../../lib/constants'
 import { fieldHasFieldValue } from '../../lib/helpers'
+import {
+  getSupportedFromLocale,
+  getSupportedToLocale,
+} from '../../lib/supported-locales'
+import {
+  getHtmlTranslation,
+  getMarkdownTranslation,
+  getRichTextTranslation,
+  getSeoTranslation,
+  getSlugTranslation,
+  getStructuredTextTranslation,
+  getTranslation,
+} from '../../lib/translation'
+import {
+  Editor,
+  GlobalParameters,
+  OpenAIDefaultValues,
+  Parameters,
+  TranslationFormat,
+  TranslationOptions,
+  TranslationService,
+  TranslationServiceKey,
+} from '../../lib/types'
 
 type Props = {
   ctx: RenderFieldExtensionCtx
@@ -139,6 +139,11 @@ export default function FieldAddon({ ctx }: Props) {
             maxTokens,
             topP,
           },
+          yandexCloudOptions: pluginParameters.yandexCloudFolderId
+            ? {
+                folderId: pluginParameters.yandexCloudFolderId,
+              }
+            : undefined,
         }
 
         try {

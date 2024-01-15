@@ -1,14 +1,15 @@
 import { get, set } from 'lodash'
-import slugify from 'slugify'
 import { fromMarkdown } from 'mdast-util-from-markdown'
 import { toMarkdown } from 'mdast-util-to-markdown'
+import slugify from 'slugify'
 
-import { TranslationOptions, Path, TranslationService, PathType } from './types'
 import { paths, removePropertyRecursively } from './helpers'
+import { Path, PathType, TranslationOptions, TranslationService } from './types'
 
-import yandexTranslate from './translation-services/yandex'
 import deeplTranslate from './translation-services/deepl'
 import openAITranslate from './translation-services/openAI'
+import yandexTranslate from './translation-services/yandex'
+import yandexCloudTranslate from './translation-services/yandexCloud'
 
 const parseHtml = require('html2json')
 
@@ -22,6 +23,9 @@ export async function getTranslation(
     }
     case TranslationService.yandex: {
       return yandexTranslate(string, options)
+    }
+    case TranslationService.yandexCloud: {
+      return yandexCloudTranslate(string, options)
     }
     case TranslationService.deepl:
     case TranslationService.deeplFree: {

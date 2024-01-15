@@ -1,10 +1,10 @@
 import { RenderConfigScreenCtx } from 'datocms-plugin-sdk'
 import {
   Canvas,
+  FieldGroup,
   Form,
   SelectField,
   SwitchField,
-  FieldGroup,
 } from 'datocms-react-ui'
 
 import {
@@ -15,9 +15,10 @@ import {
 import { GlobalParameters, TranslationService } from '../../lib/types'
 
 import ApiTextField from '../../components/ApiTextField/ApiTextField'
-import { OpenAIConfigFieldsConfigScreen } from '../../components/OpenAIConfigFields/OpenAIConfigFields'
-import GlossaryIdField from '../../components/GlossaryIdField/GlossaryIdField'
 import FormalityField from '../../components/FormalityField/FormalityField'
+import GlossaryIdField from '../../components/GlossaryIdField/GlossaryIdField'
+import { OpenAIConfigFieldsConfigScreen } from '../../components/OpenAIConfigFields/OpenAIConfigFields'
+import YandexCloudFolderIdField from '../../components/YandexCloudFolderIdField/YandexCloudFolderIdField'
 
 type Props = {
   ctx: RenderConfigScreenCtx
@@ -33,6 +34,9 @@ export default function ConfigScreen({ ctx }: Props) {
   const isDeepl =
     selectedTranslationService.value === TranslationService.deepl ||
     selectedTranslationService.value === TranslationService.deeplFree
+
+  const isYandexCloud =
+    selectedTranslationService.value === TranslationService.yandexCloud
 
   return (
     <Canvas ctx={ctx}>
@@ -121,6 +125,21 @@ export default function ConfigScreen({ ctx }: Props) {
                 )
               )
             })}
+
+            {isYandexCloud && (
+              <YandexCloudFolderIdField
+                value={pluginParameters.yandexCloudFolderId || ''}
+                onBlur={(newValue) => {
+                  if (newValue !== pluginParameters.yandexCloudFolderId) {
+                    ctx.updatePluginParameters({
+                      ...pluginParameters,
+                      yandexCloudFolderId: newValue,
+                    })
+                    ctx.notice('Settings updated successfully!')
+                  }
+                }}
+              />
+            )}
 
             {isDeepl && (
               <FormalityField ctx={ctx} value={selectedFormalityLevel} />

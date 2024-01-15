@@ -30,6 +30,7 @@ export enum TranslationFormat {
 
 export enum TranslationService {
   yandex = 'yandex',
+  yandexCloud = 'yandexCloud',
   deepl = 'deepl',
   deeplFree = 'deeplFree',
   openAI = 'openAI',
@@ -38,6 +39,7 @@ export enum TranslationService {
 
 export enum TranslationServiceKey {
   yandexKey = 'yandexApiKey',
+  yandexCloudKey = 'yandexCloudApiKey',
   deeplApiKey = 'deeplApiKey',
   deeplFreeApiKey = 'deeplFreeApiKey',
   openAIKey = 'openAIApiKey',
@@ -65,9 +67,11 @@ export type Parameters = {
   temperature?: number
   maxTokens?: number
   topP?: number
+  yandexCloudFolderId?: string
   deeplGlossaryId?: string
   deeplFormalityLevel?: SettingOption<DeeplFormalityLevel>
   [TranslationServiceKey.yandexKey]?: string
+  [TranslationServiceKey.yandexCloudKey]?: string
   [TranslationServiceKey.deeplApiKey]?: string
   [TranslationServiceKey.deeplFreeApiKey]?: string
   [TranslationServiceKey.openAIKey]?: string
@@ -90,6 +94,9 @@ export type TranslationOptions = {
   format: TranslationFormat
   translationService: TranslationService
   apiKey: string
+  yandexCloudOptions?: {
+    folderId: string
+  }
   deeplOptions?: {
     glossaryId?: string
     formality?: DeeplFormalityLevel

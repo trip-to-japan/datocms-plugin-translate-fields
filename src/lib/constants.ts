@@ -18,6 +18,7 @@ export const fieldsOptions: SettingOption<DatoFieldType>[] = [
 
 export const translationServiceOptions: SettingOption<TranslationService>[] = [
   { label: 'Yandex translate', value: TranslationService.yandex },
+  { label: 'Yandex Cloud', value: TranslationService.yandexCloud },
   { label: 'DeepL API Pro', value: TranslationService.deepl },
   { label: 'DeepL API Free', value: TranslationService.deeplFree },
   { label: 'OpenAI', value: TranslationService.openAI },
