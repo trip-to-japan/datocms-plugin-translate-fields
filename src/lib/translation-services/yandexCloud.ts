@@ -6,7 +6,7 @@ export default async function translate(
 ): Promise<string> {
   const request = await fetch(
     // `https://translate.api.cloud.yandex.net/translate/v2/translate`,
-    'https://trip.solberg.is/api/yandex-cloud-translate',
+    'https://www.triptojapan.com/api/yandex-cloud-translate',
     {
       method: 'POST',
       headers: {
