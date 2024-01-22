@@ -1,10 +1,10 @@
 import {
   DatoFieldType,
+  DeeplFormalityLevel,
   Editor,
+  SettingOption,
   TranslationFormat,
   TranslationService,
-  DeeplFormalityLevel,
-  SettingOption,
 } from './types'
 
 export const fieldsOptions: SettingOption<DatoFieldType>[] = [
@@ -22,6 +22,7 @@ export const translationServiceOptions: SettingOption<TranslationService>[] = [
   { label: 'DeepL API Pro', value: TranslationService.deepl },
   { label: 'DeepL API Free', value: TranslationService.deeplFree },
   { label: 'OpenAI', value: TranslationService.openAI },
+  { label: 'Azure', value: TranslationService.azure },
 ]
 
 export const translationFormats = {

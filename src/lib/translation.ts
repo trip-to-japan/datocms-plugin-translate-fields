@@ -6,6 +6,7 @@ import slugify from 'slugify'
 import { paths, removePropertyRecursively } from './helpers'
 import { Path, PathType, TranslationOptions, TranslationService } from './types'
 
+import azureTranslate from './translation-services/azure'
 import deeplTranslate from './translation-services/deepl'
 import openAITranslate from './translation-services/openAI'
 import yandexTranslate from './translation-services/yandex'
@@ -20,6 +21,9 @@ export async function getTranslation(
   switch (options.translationService) {
     case TranslationService.mock: {
       return `Translated ${string}`
+    }
+    case TranslationService.azure: {
+      return azureTranslate(string, options)
     }
     case TranslationService.yandex: {
       return yandexTranslate(string, options)

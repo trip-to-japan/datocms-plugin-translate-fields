@@ -34,6 +34,7 @@ export enum TranslationService {
   deepl = 'deepl',
   deeplFree = 'deeplFree',
   openAI = 'openAI',
+  azure = 'azure',
   mock = 'mock',
 }
 
@@ -43,6 +44,7 @@ export enum TranslationServiceKey {
   deeplApiKey = 'deeplApiKey',
   deeplFreeApiKey = 'deeplFreeApiKey',
   openAIKey = 'openAIApiKey',
+  azureKey = 'azureApiKey',
   mockKey = 'mockApiKey',
 }
 
@@ -75,6 +77,7 @@ export type Parameters = {
   [TranslationServiceKey.deeplApiKey]?: string
   [TranslationServiceKey.deeplFreeApiKey]?: string
   [TranslationServiceKey.openAIKey]?: string
+  [TranslationServiceKey.azureKey]?: string
   [TranslationServiceKey.mockKey]?: string
 }
 
