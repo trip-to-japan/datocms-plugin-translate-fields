@@ -19,11 +19,25 @@ export default async function translate(
   }
   const translationClient = TextTranslationClient(ENDPOINT, translateCedential)
 
+  let toLocale
+
+  switch (options.toLocale) {
+    case 'zh-TW':
+      toLocale = 'zh-Hant'
+      break
+    case 'zh-CN':
+      toLocale = 'zh-Hans'
+      break
+    default:
+      toLocale = options.toLocale
+      break
+  }
+
   const inputText: InputTextItem[] = [{ text: string }]
   const translateResponse = await translationClient.path('/translate').post({
     body: inputText,
     queryParameters: {
-      to: options.toLocale,
+      to: toLocale,
       from: options.fromLocale,
     },
   })
@@ -35,7 +49,7 @@ export default async function translate(
   const translations = translateResponse.body as TranslatedTextItemOutput[]
   for (const translation of translations) {
     for (const row of translation.translations) {
-      if (row.to === options.toLocale) {
+      if (row.to === toLocale) {
         return row.text
       }
     }
